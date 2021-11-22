@@ -20,10 +20,12 @@ public class Hero extends AnimatedThing{
     private double y;
     private int state =0;
     private double vx=0;
-    private double vsaut=7*85/1.7;
+    private double vsaut=9.5*95/1.7;
     private double vy=0;
-    final double ay=-9.81*85/1.3;
+    final double ay=-9.81*120/1.3;
     private double deltay=200;
+    private boolean invicible = false;
+    private boolean visible = true;
 
 
     public Hero(String path, double x, double y) {
@@ -53,12 +55,21 @@ public class Hero extends AnimatedThing{
         this.x = x;
     }
 
+    public boolean isInvicible(){
+        return (this.invicible);
+    }
+
+    public void setInvicible(boolean invicible) {
+        this.invicible = invicible;
+    }
+
     @Override
     void update(double time) {
+        System.out.println(this.x);
         final double a = 60 * 9.81 - 0.8 * vx;
         vx += a * time / 1000;
         this.x += vx * time / 1000;
-
+        this.getImageView().setVisible(true);
         if (state == 0) {
             this.setY(200);
             this.getImageView().setY(this.getY());
@@ -79,13 +90,17 @@ public class Hero extends AnimatedThing{
             this.getImageView().setY(this.getY());
         }
 
-        if (this.y>180){
+        if (this.y>190){
             this.state = 0 ;
         }
 
-        if (state == 2) {
-            this.setY(this.getY() + 7);
-            this.getImageView().setY(this.getY());
+        if(this.y<190){
+            state=1;
+        }
+
+        if(this.invicible){
+            visible = !visible;
+            this.getImageView().setVisible(visible);
         }
 
         try {
@@ -93,6 +108,8 @@ public class Hero extends AnimatedThing{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
 
     }
 

@@ -5,7 +5,6 @@ import javafx.scene.Group;
 
 public abstract class AnimatedThing {
     private double x,y;
-    private int state;
 
 
     public AnimatedThing(String path, double x, double y){

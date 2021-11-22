@@ -18,6 +18,14 @@ public class Camera {
         return x;
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public double getY() {
         return y;
     }
